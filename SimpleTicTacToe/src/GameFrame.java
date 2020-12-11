@@ -25,6 +25,7 @@ public class GameFrame extends JFrame implements ActionListener{
 	JButton b8;
 	JButton b9;
 	JButton[][] arr = new JButton[3][3];
+	
 	int i=1;
 	public GameFrame() {
 		panel = new JPanel() ;
