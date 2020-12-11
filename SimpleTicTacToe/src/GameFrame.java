@@ -1,6 +1,7 @@
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,9 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class GameFrame extends JFrame implements ActionListener{
-	JLabel label ;
+	JPanel panel ;
 	JButton b1;
 	JButton b2;
 	JButton b3;
@@ -25,7 +27,7 @@ public class GameFrame extends JFrame implements ActionListener{
 	JButton[][] arr = new JButton[3][3];
 	int i=1;
 	public GameFrame() {
-		label = new JLabel() ;
+		panel = new JPanel() ;
 		b1 = new JButton();
 		b1.setFont(new Font(Font.SANS_SERIF, Font.TYPE1_FONT, 80));
 		
@@ -75,18 +77,17 @@ public class GameFrame extends JFrame implements ActionListener{
 		arr[2][0] = b7;
 		arr[2][1] = b8;
 		arr[2][2] = b9;
-		
-		label.setLayout(new GridLayout(3, 3));
-		label.add(b1);
-		label.add(b2);
-		label.add(b3);
-		label.add(b4);
-		label.add(b5);
-		label.add(b6);
-		label.add(b7);
-		label.add(b8);
-		label.add(b9);
-		this.setContentPane(label);
+		panel.setLayout(new GridLayout(3, 3));
+		panel.add(b1);
+		panel.add(b2);
+		panel.add(b3);
+		panel.add(b4);
+		panel.add(b5);
+		panel.add(b6);
+		panel.add(b7);
+		panel.add(b8);
+		panel.add(b9);
+		this.setContentPane(panel);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(480, 480);
 		this.setResizable(false);
