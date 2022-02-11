@@ -116,18 +116,61 @@ public class GamePanel extends JFrame implements ActionListener {
 
 		if (playersTurn.equalsIgnoreCase(player2)) {
 
-			int i = rand.nextInt(3);
-			int j = rand.nextInt(3);
-			while (!btns[i][j].getText().isEmpty() && !isFull()) {
-				i = rand.nextInt(3);
-				j = rand.nextInt(3);
+			int bestScore = Integer.MIN_VALUE;
+			int[] move = new int[2];
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					if (btns[i][j].getText().equals("")) {
+						btns[i][j].setText(player2);
+						int score = minimax(btns, 0, false);
+						btns[i][j].setText("");
+						if (score > bestScore) {
+							bestScore = score;
+							move[0] = i;
+							move[1] = j;
+						}
+					}
+				}
 			}
-			if (playMove(btns[i][j])) {
+			if (playMove(btns[move[0]][move[1]])) {
 				checkGameOver();
 				changeTurn();
 			}
 		}
 
+	}
+	
+	public int eval(int depth, boolean isMax) {
+		int bestScore = isMax ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (btns[i][j].getText().equals("")) {
+					btns[i][j].setText(isMax ? player2 : player1);
+					int score = minimax(btns, depth + 1, isMax ? false : true);
+					btns[i][j].setText("");
+					bestScore = isMax ? Math.max(score, bestScore) : Integer.min(score, bestScore);
+				}
+			}
+		}
+		return bestScore;
+	}
+
+	private int minimax(JButton[][] board, int depth, boolean isMax) {
+
+		int result = checkWinner(isMax ? player1 : player2);
+		if (result != -100) {
+			return result;
+		}
+		return eval(depth, isMax);
+	}
+
+	private int checkWinner(String player) {
+		if (isWinner(player)) {
+			return player.equalsIgnoreCase(player1) ? -1 : 1;
+		} else if (isFull()) {
+			return 0;
+		}
+		return -100;
 	}
 
 	public void twoPlayersGame(ActionEvent e) {
@@ -187,6 +230,11 @@ public class GamePanel extends JFrame implements ActionListener {
 			}
 		}
 		return true;
+	}
+
+	public int minmax() {
+
+		return 0;
 	}
 
 	public boolean checkGameOver() {
