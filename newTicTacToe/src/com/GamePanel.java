@@ -118,6 +118,7 @@ public class GamePanel extends JFrame implements ActionListener {
 
 			int bestScore = Integer.MIN_VALUE;
 			int[] move = new int[2];
+			
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
 					if (btns[i][j].getText().equals("")) {
@@ -157,7 +158,7 @@ public class GamePanel extends JFrame implements ActionListener {
 
 	private int minimax(JButton[][] board, int depth, boolean isMax) {
 
-		int result = checkWinner(isMax ? player1 : player2);
+		int result = checkWinner(isMax ? player2 : player1);
 		if (result != -100) {
 			return result;
 		}
