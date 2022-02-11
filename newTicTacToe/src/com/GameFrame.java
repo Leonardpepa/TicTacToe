@@ -17,59 +17,74 @@ public class GameFrame extends JFrame {
 	private JButton vsComputer;
 	private JButton multiPlayer;
 	private JLabel title;
-	
-	
-	GameFrame(){
-		loginPanel = new  JPanel();
+
+	GameFrame() {
+		loginPanel = new JPanel();
 		loginPanel.setLayout(null);
-		
+
 		vsComputer = new JButton("Play vs Computer");
 		multiPlayer = new JButton("2 Players");
 		title = new JLabel("Tic Tac Toe");
-		
-		title.setFont(new Font(Font.SANS_SERIF,Font.ITALIC,60));
+
+		title.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 60));
 		title.setBounds(30, 30, 370, 60);
-		
-		
+
 		vsComputer.setBounds(60, 150, 260, 60);
 		multiPlayer.setBounds(60, 250, 260, 60);
-		
-		
+
 		multiPlayer.addActionListener(e -> {
 			try {
-				String firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
+				Object[] options = { "X", "O" };
 
-				while (!firstPlayersChoice.equalsIgnoreCase("x") && !firstPlayersChoice.equalsIgnoreCase("o")) {
+				int choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+				while (choice != 0 && choice != 1) {
 					JOptionPane.showMessageDialog(null, "you can choose only X or O");
-					firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
+					choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
 				}
-				String secondPlayerChoice = firstPlayersChoice.equalsIgnoreCase("x") ? "o" : "x";
-				new GamePanel(firstPlayersChoice, secondPlayerChoice, false);
+
+				String player1 = choice == 0 ? "X" : "O";
+				String player2 = choice == 1 ? "X" : "O";
+
+				new GamePanel(player1, player2, false);
 				this.dispose();
-				
+
 			} catch (NullPointerException ex) {
-				
+
 			}
 		});
-		
+
 		vsComputer.addActionListener(e -> {
 			try {
-				String playersChoice = JOptionPane.showInputDialog("choose X or O");
-				while(!playersChoice.equalsIgnoreCase("x") && !playersChoice.equalsIgnoreCase("o") ) {
+				Object[] options = { "X", "O" };
+
+				int choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+				while (choice != 0 && choice != 1) {
 					JOptionPane.showMessageDialog(null, "you can choose only X or O");
-					playersChoice = JOptionPane.showInputDialog("choose X or O");
+					choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
+							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
 				}
-				new GamePanel(playersChoice,playersChoice.equalsIgnoreCase("x") ? "o":"x", true);
-				this.dispose();				
+
+				String player1 = choice == 0 ? "X" : "O";
+				String player2 = choice == 1 ? "X" : "O";
+
+				new GamePanel(player1, player2, true);
+				this.dispose();
 			} catch (NullPointerException ex) {
-			
+
 			}
 		});
-		
+
 		loginPanel.add(title);
 		loginPanel.add(vsComputer);
 		loginPanel.add(multiPlayer);
-		
+
 		this.setContentPane(loginPanel);
 		this.setTitle("Tic Tac Toe");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,9 +92,7 @@ public class GameFrame extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		
+
 	}
-	
-	
-	
+
 }

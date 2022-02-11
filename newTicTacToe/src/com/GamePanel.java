@@ -36,6 +36,7 @@ public class GamePanel extends JFrame implements ActionListener {
 	private String playersTurn;
 	private boolean AI;
 	private Random rand;
+	private JPanel container;
 
 	public GamePanel(String player1, String player2, boolean ai) {
 		this.player1 = player1;
@@ -48,8 +49,10 @@ public class GamePanel extends JFrame implements ActionListener {
 
 		rand = new Random(System.currentTimeMillis());
 
+		container = new JPanel();
+		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+
 		infoPanel = new JPanel();
-		infoPanel.setBounds(0, 0, 485, 80);
 		infoPanel.setBackground(Color.white);
 		infoPanel.setBorder(new LineBorder(Color.CYAN, 10));
 
@@ -60,12 +63,13 @@ public class GamePanel extends JFrame implements ActionListener {
 
 		gamePanel = new JPanel();
 		gamePanel.setLayout(new GridLayout(3, 3));
-		gamePanel.setBounds(0, 80, 485, 380);
 
 		btns = new JButton[3][3];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				btns[i][j] = new JButton();
+				btns[i][j].setPreferredSize(new Dimension(161, 119));
+				btns[i][j].setSize(new Dimension(161, 119));
 				btns[i][j].setName(i + "#" + j);
 				btns[i][j].setFont(new Font(Font.SANS_SERIF, Font.TYPE1_FONT, 80));
 				btns[i][j].setBackground(Color.cyan);
@@ -80,14 +84,13 @@ public class GamePanel extends JFrame implements ActionListener {
 			}
 		}
 
-		this.setLayout(null);
-		this.add(infoPanel);
-		this.add(gamePanel);
-
+		container.add(infoPanel, BoxLayout.X_AXIS);
+		container.add(gamePanel, BoxLayout.Y_AXIS);
+		this.setContentPane(container);
 		this.setTitle("Tic Tac Toe");
 		this.setSize(500, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 
@@ -139,7 +142,7 @@ public class GamePanel extends JFrame implements ActionListener {
 	}
 
 	public boolean playMove(JButton btn) {
-		if (!btn.getText().equals("")) {
+		if (!btn.getText().equalsIgnoreCase("")) {
 			return false;
 		}
 
@@ -188,6 +191,7 @@ public class GamePanel extends JFrame implements ActionListener {
 
 	public boolean checkGameOver() {
 		if (isWinner(playersTurn)) {
+			playersTurnLabel.setText("winer is " + playersTurn);
 			JOptionPane.showMessageDialog(null, "game over winer is " + playersTurn);
 			this.dispose();
 			new GameFrame();
