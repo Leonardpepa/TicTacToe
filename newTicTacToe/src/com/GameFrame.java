@@ -36,16 +36,14 @@ public class GameFrame extends JFrame {
 			try {
 				Object[] options = { "X", "O" };
 
-				int choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
+				int choice = JOptionPane.showOptionDialog(null, "Choose you mark", null,
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-				while (choice != 0 && choice != 1) {
-					JOptionPane.showMessageDialog(null, "you can choose only X or O");
-					choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
+				System.out.println(choice);
+				
+				if(choice == -1) {
+					return;
 				}
-
+				
 				String player1 = choice == 0 ? "X" : "O";
 				String player2 = choice == 1 ? "X" : "O";
 
@@ -63,14 +61,11 @@ public class GameFrame extends JFrame {
 
 				int choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-				while (choice != 0 && choice != 1) {
-					JOptionPane.showMessageDialog(null, "you can choose only X or O");
-					choice = JOptionPane.showOptionDialog(null, "you can choose only X or O", null,
-							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
+				
+				if(choice == -1) {
+					return;
 				}
-
+				
 				String player1 = choice == 0 ? "X" : "O";
 				String player2 = choice == 1 ? "X" : "O";
 
