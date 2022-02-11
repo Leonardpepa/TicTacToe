@@ -144,7 +144,7 @@ public class GamePanel extends JFrame implements ActionListener {
 				if (btns[i][j].getText().equalsIgnoreCase("")) {
 					btns[i][j].setText(isMax ? player2 : player1);
 					int score = minimax(btns, depth + 1, alpha, beta, isMax ? false : true);
-					bestScore = isMax ? Math.max(score, bestScore) : Integer.min(score, bestScore);
+					bestScore = isMax ? Math.max(score, bestScore) : Math.min(score, bestScore);
 					btns[i][j].setText("");
 					if (isMax) {
 						alpha = Math.max(alpha, score);
