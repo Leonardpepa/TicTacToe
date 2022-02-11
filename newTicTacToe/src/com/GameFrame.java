@@ -1,4 +1,4 @@
-package newTicTacToe;
+package com;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GameFrame extends JFrame {
+
+	private static final long serialVersionUID = 1011954987998509781L;
 	private JPanel loginPanel;
 	private JButton vsComputer;
 	private JButton multiPlayer;
@@ -34,24 +36,34 @@ public class GameFrame extends JFrame {
 		
 		
 		multiPlayer.addActionListener(e -> {
-			String firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
-			while(!firstPlayersChoice.equalsIgnoreCase("x") && !firstPlayersChoice.equalsIgnoreCase("o") ) {
-				JOptionPane.showMessageDialog(null, "you can choose only X or O");
-				firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
+			try {
+				String firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
+
+				while (!firstPlayersChoice.equalsIgnoreCase("x") && !firstPlayersChoice.equalsIgnoreCase("o")) {
+					JOptionPane.showMessageDialog(null, "you can choose only X or O");
+					firstPlayersChoice = JOptionPane.showInputDialog("choose X or O");
+				}
+				String secondPlayerChoice = firstPlayersChoice.equalsIgnoreCase("x") ? "o" : "x";
+				new GamePanel(firstPlayersChoice, secondPlayerChoice, false);
+				this.dispose();
+				
+			} catch (NullPointerException ex) {
+				
 			}
-			String secondPlayerChoice = firstPlayersChoice.equalsIgnoreCase("x") ?  "o":"x";
-		    	new GamePanel(firstPlayersChoice, secondPlayerChoice, false);
-		    	this.dispose();		    	
 		});
 		
 		vsComputer.addActionListener(e -> {
-			String playersChoice = JOptionPane.showInputDialog("choose X or O");
-			while(!playersChoice.equalsIgnoreCase("x") && !playersChoice.equalsIgnoreCase("o") ) {
-				JOptionPane.showMessageDialog(null, "you can choose only X or O");
-				playersChoice = JOptionPane.showInputDialog("choose X or O");
-			}
+			try {
+				String playersChoice = JOptionPane.showInputDialog("choose X or O");
+				while(!playersChoice.equalsIgnoreCase("x") && !playersChoice.equalsIgnoreCase("o") ) {
+					JOptionPane.showMessageDialog(null, "you can choose only X or O");
+					playersChoice = JOptionPane.showInputDialog("choose X or O");
+				}
 				new GamePanel(playersChoice,playersChoice.equalsIgnoreCase("x") ? "o":"x", true);
-				this.dispose();
+				this.dispose();				
+			} catch (NullPointerException ex) {
+			
+			}
 		});
 		
 		loginPanel.add(title);

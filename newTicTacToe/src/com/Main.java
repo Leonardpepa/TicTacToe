@@ -1,4 +1,4 @@
-package newTicTacToe;
+package com;
 
 public class Main {
 
